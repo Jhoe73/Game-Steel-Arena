@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8" />
+    <title>Animação</title>
+	<script type="text/javascript" src="../js/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var game = new Phaser.Game(1920, 1080, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
+
+function preload() {
+		game.load.image('background', '../assets/cenario.png')
+    game.load.image('ground', '../assets/plataforma.png');
+    game.load.spritesheet('robo_verde', '../assets/robo_verde.png', 101, 101);
+}
+
+var population_players = ["robo_verde", "robo_verde"];
+var controls_players = [[Phaser.Keyboard.UP, Phaser.Keyboard.RIGHT, Phaser.Keyboard.LEFT], [Phaser.Keyboard.W, Phaser.Keyboard.D, Phaser.Keyboard.A]];
+var players = [];
+var playersObj = [];
+const gravityPlayer = 1758;
+
+function Player(spritesheet, width, height, gravityPlayer, frame, up_button, right_button, left_button){
+	var player;
+	this.spritesheet = spritesheet;
+	this.width = width;
+	this.height = height;
+	this.gravityPlayer = gravityPlayer;
+	this.frame = frame;
+	this.collideWorldBounds = true;
+	this.up_button = game.input.keyboard.addKey(up_button);
+	this.right_button = game.input.keyboard.addKey(right_button);
+	this.left_button = game.input.keyboard.addKey(left_button);
+	if ((this.frame >=0 && this.frame<=4) || (this.frame >=8 && this.frame <=11)){
+		this.direcao = "R";
+	} else {
+		this.direcao = "L";
+	}
+	var direita;
+	var esquerda;
+	var puloR;
+	var puloL;
+
+	//Getters
+
+	this.getPlayer = function () { return this.player; };
+
+	this.getSpritesheet = function () { return this.spritesheet; };
+
+  this.getWidth = function () { return this.width; };
+
+  this.getHeight = function () { return this.height; };
+
+  this.getGravityPlayer = function () { return this.gravityPlayer; };
+
+	this.getFrame = function () { return this.frame; };
+
+  this.getCollideWorldBounds = function () { return this.collideWorldBounds; };
+
+	this.getUp_button = function () { return this.up_button; };
+
+	this.getRight_button = function () { return this.right_button; };
+
+	this.getLeft_button = function () { return this.left_button; };
+
+	this.getDirecao = function () { return this.direcao; };
+
+	//Setters
+
+	this.setPlayer = function (value) { this.player = value; };
+
+  this.setSpriteseet = function (value) { this.spritesheet = value; };
+
+  this.setWidth = function (value) { this.width = value; };
+
+  this.setHeight = function (value) { this.height = value; };
+
+  this.setGravityPlayer = function (value) { this.gravityPlayer = value; };
+
+	this.setFrame = function (value) { this.frame = value; };
+
+  this.setCollideWorldBounds = function (value) { this.collideWorldBounds = value; };
+
+	this.setUp_button = function (value) { this.up_button = value; };
+
+	this.setRight_button = function (value) { this.right_button = value; };
+
+	this.setLeft_button = function (value) { this.left_button = value; };
+
+	this.setDirecao = function (value) { this.direcao = value; };
+
+	//
+
+  this.desenhar = function() {
+
+		this.setPlayer(game.add.sprite(this.getWidth(), game.world.height-this.getHeight(), this.getSpritesheet()));
+
+		this.getPlayer().scale.set(.80);
+
+		this.getPlayer().enableBody = true;
+
+		game.physics.p2.enable(this.getPlayer());
+
+		//this.getPlayer().body.setSize(96, 87, 2, 0); -----------------  Polygon
+
+		this.getPlayer().body.gravity.y = this.getGravityPlayer();
+
+		this.getPlayer().body.collideWorldBounds = this.getCollideWorldBounds();
+
+		this.getPlayer().body.bounce.y = 0;
+
+		this.direita = this.getPlayer().animations.add('right', [1,0,1,0,2,3,2,3], 9, true);
+	  this.esquerda = this.getPlayer().animations.add('left', [5,4,5,4,6,7,6,7], 9, true);
+		this.puloR = this.getPlayer().animations.add('upR', [9,10,10,11,11,8,0], 25, true);
+		this.puloL = this.getPlayer().animations.add('upL', [13,14,14,15,15,12,4], 25, true);
+
+		this.getPlayer().frame = this.getFrame();
+
+		players.push(this.getPlayer());
+  }
+
+	this.movimento = function () {
+
+		if (this.getRight_button().isDown && !this.getLeft_button().isDown){
+        //  Move to the right
+				this.setDirecao("R");
+				this.getPlayer().body.velocity.x = 110;
+				if (!(this.puloR.isPlaying || this.puloL.isPlaying)) {
+						this.getPlayer().animations.play('right', false, false);
+				}
+		} else {
+				this.direita.onComplete.add(function (player) {
+					player.animations.stop('right',true, true);
+					player.frame = 0;
+				}, this.getPlayer());
+		}
+
+		if (this.getLeft_button().isDown && !this.getRight_button().isDown ){
+        //  Move to the left
+				this.setDirecao("L");
+				this.getPlayer().body.velocity.x = -110;
+				if (!(this.puloL.isPlaying || this.puloR.isPlaying)) {
+						this.getPlayer().animations.play('left', false, false);
+				}
+    } else {
+				this.esquerda.onComplete.add(function (player) {
+					player.animations.stop('left',true, true);
+					player.frame = 4;}, this.getPlayer());
+		}
+
+		//  Allow the this.player to jump if they are touching the ground.
+    if (this.getUp_button().isDown && this.player.body.touching.down){
+			  if (!(this.puloR.isPlaying || this.puloL.isPlaying)) {
+					this.getPlayer().body.velocity.y = -700;
+					switch (this.getDirecao()) {
+						case "R":
+							this.getPlayer().animations.play('upR',false, false);
+							break;
+				 		case "L":
+					 		this.getPlayer().animations.play('upL',false, false);
+				 			break;
+						default:
+					  	break;
+				}
+			 }
+    } else {
+			switch (this.getDirecao()) {
+				case "R":
+					this.puloR.onComplete.add(function (player) {
+						player.animations.stop('upR',true, true);
+						player.frame = 1;}, this.getPlayer());
+					break;
+				case "L":
+					this.puloL.onComplete.add(function (player) {
+						player.animations.stop('upL',true, true);
+						player.frame = 4;}, this.getPlayer());
+					break;
+				default:
+					break;
+			}
+		}
+	}
+}
+
+function create() {
+
+	//	Enable p2 physics
+	game.physics.startSystem(Phaser.Physics.P2JS);
+
+	game.add.sprite(0,0, 'background');
+
+  //  The platforms group contains the ground and the 2 ledges we can jump on
+  platforms = game.add.group();
+
+  //  We will enable physics for any object that is created in this group
+  platforms.enableBody = true;
+
+	// Here we create the ground.
+  var ground = platforms.create(0, game.world.height-224, 'ground');
+
+  //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+  ground.scale.setTo(3, 3);
+
+	ground.body.setSize(1080, 30, 0, 14);
+
+  //  This stops it from falling away when you jump on it
+  ground.body.immovable = true;
+
+	ground.body.allowGravity = false;
+
+	game.physics.p2.enable(ground);
+
+	for(var i = 0; i < population_players.length; i++){
+
+		player = new Player(population_players[i], 150+i*200, 450, gravityPlayer, i==0?1:5, controls_players[i][0], controls_players[i][1], controls_players[i][2]);
+    player.desenhar();
+		playersObj.push(player);
+	}
+}
+
+function update() {
+
+	game.physics.arcade.collide(players[0], players[1]);
+	game.physics.arcade.collide(players[0], platforms);
+	game.physics.arcade.collide(players[1], platforms);
+
+		for(i = 0; i < population_players.length; i++) {
+
+			game.physics.arcade.collide(players[i], players[population_players.length-i-1]);
+			game.physics.arcade.collide(players[i], platforms);
+
+			players[i].body.velocity.x = 0;
+
+			playersObj[i].movimento();
+
+			console.log(controls_players[i][i]);
+		}
+
+}
+
+function render() {
+
+		for(i = 0; i < population_players.length; i++) {
+			game.debug.body(players[i]);
+
+	    game.debug.bodyInfo(players[i], 32, 32);
+		}
+		//platforms.forEach( game.debug.body, game.debug);
+
+}
+
+</script>
+
+</body>
+</html>

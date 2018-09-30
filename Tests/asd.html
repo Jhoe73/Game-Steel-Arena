@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8" />
+    <title>Animação</title>
+	<script type="text/javascript" src="../js/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var game = new Phaser.Game(1920, 1080, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
+
+function preload() {
+		game.load.image('background', '../assets/cenario.png')
+    game.load.image('ground', '../assets/plataforma2.png');
+    game.load.spritesheet('robo_verde', '../assets/robo_verde.png', 101, 101);
+}
+
+var population_players = ["robo_verde", "robo_verde"];
+var players;
+var player2;
+var puloR;
+var puloL;
+var direcao = "R";
+var cursors;
+
+function create() {
+
+    //  We're going to be using physics, so enable the Arcade Physics system
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+
+		game.add.sprite(0,0, 'background');
+
+    //  The platforms group contains the ground and the 2 ledges we can jump on
+    platforms = game.add.group();
+
+    //  We will enable physics for any object that is created in this group
+    platforms.enableBody = true;
+
+		// Here we create the ground.
+    var ground = platforms.create(0, game.world.height-224, 'ground');
+
+    //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+    ground.scale.setTo(3, 7);
+
+		ground.body.setSize(1080, 150, 0, 50);
+
+    //  This stops it from falling away when you jump on it
+    ground.body.immovable = true;
+
+		players = game.add.group();
+		players.enableBody = true;
+		game.physics.arcade.enable(players);
+
+		for(var i = 0; i < population_players.length; i++){
+			var player = players.create(150+i*200, game.world.height-450, 'robo_verde');
+			player.body.collideWorldBounds = true;
+			player.body.gravity.y = 2000;
+			player.scale.set(.80);
+			console.log('i = '+i);
+		}
+
+    // The player2 and its settings
+    player2 = game.add.sprite(5, game.world.height-450, 'robo_verde');
+		player2.scale.set(.80);
+
+    //  We need to enable physics on the player2
+    game.physics.arcade.enable(player2);
+
+    //  player2 physics properties. Give the little guy a slight bounce.
+    player2.body.gravity.y = 2000;
+    player2.body.collideWorldBounds = true;
+
+    //  Our two animations, walking left and right.
+		direita = player2.animations.add('right', [1,0,1,0,2,3,2,3], 9, true);
+	  esquerda = player2.animations.add('left', [5,4,5,4,6,7,6,7], 9, true);
+		puloR = player2.animations.add('upR', [9,10,10,11,11,8,0], 25, true);
+		puloL = player2.animations.add('upL', [13,14,14,15,15,12,4], 25, true);
+
+    //  Our controls.
+    cursors = game.input.keyboard.createCursorKeys();
+
+	player2.frame = 1;
+}
+
+function update() {
+
+	for(i = 0; i < population_players.length; i++) {
+		/*//  Collide the player and the stars with the platforms
+		game.physics.arcade.collide(population_players[i], platforms);
+
+		//  Reset the players velocity (movement)
+		players[i].body.velocity.x = 0;
+
+		player.movimento();
+
+		//alert(players[i].getHeight());*/
+	}
+
+	//  Collide the player2 and the stars with the platforms
+	game.physics.arcade.collide(player2, platforms);
+	game.physics.arcade.collide(players, platforms, collisionHandler, null, this);
+	game.physics.arcade.collide(player2, players);
+	game.physics.arcade.collide(players, players);
+
+    //  Reset the player2s velocity (movement)
+    player2.body.velocity.x = 0;
+
+		if (cursors.right.isDown && !cursors.left.isDown){
+        //  Move to the right
+				direcao = "R";
+				player2.body.velocity.x = 110;
+				if (!(puloR.isPlaying || puloL.isPlaying)) {
+						player2.animations.play('right', false, false);
+				}
+		} else {
+				direita.onComplete.add(function () {
+					player2.animations.stop('right',true, true);
+					player2.frame = 0;
+				}, player2);
+		}
+
+		if (cursors.left.isDown && !cursors.right.isDown ){
+        //  Move to the left
+				direcao = "L";
+				player2.body.velocity.x = -110;
+				if (!(puloL.isPlaying || puloR.isPlaying)) {
+						player2.animations.play('left', false, false);
+				}
+    } else {
+				esquerda.onComplete.add(function () {
+					player2.animations.stop('left',true, true);
+					player2.frame = 4;}, player2);
+		}
+
+		//  Allow the player2 to jump if they are touching the ground.
+    if (cursors.up.isDown && player2.body.touching.down){
+			  if (!(puloR.isPlaying || puloL.isPlaying)) {
+					player2.body.velocity.y = -700;
+					switch (direcao) {
+						case "R":
+							player2.animations.play('upR',false, false);
+							break;
+				 		case "L":
+					 		player2.animations.play('upL',false, false);
+				 			break;
+						default:
+					  	break;
+				}
+			 }
+    } else {
+			switch (direcao) {
+				case "R":
+					puloR.onComplete.add(function () {
+						player2.animations.stop('upR',true, true);}, player2);
+					break;
+				case "L":
+					puloL.onComplete.add(function () {
+						player2.animations.stop('upL',true, true);}, player2);
+					break;
+				default:
+					break;
+			}
+		}
+}
+
+function collisionHandler (obj1, obj2) {
+
+    game.stage.backgroundColor = '#992d2d';
+
+}
+
+function render() {
+
+    game.debug.bodyInfo(player2, 32, 32);
+
+    game.debug.body(player2);
+    game.debug.body(players);
+
+}
+
+</script>
+
+</body>
+</html>

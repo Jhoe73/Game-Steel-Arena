@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8" />
+    <title>Players</title>
+	<script type="text/javascript" src="../js/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var game = new Phaser.Game(1080, 720, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+function preload() {
+    game.load.image('ground', '../assets/platform.png');
+    game.load.spritesheet('robo', '../assets/robo_verde.png', 101, 101);
+}
+
+var players = [];
+const gravityPlayer = 2000;
+
+function Player(spritesheet, width, height, gravityPlayer, frame, up_button, right_button, left_button, direcao){
+	var player;
+	this.spritesheet = spritesheet;
+	this.width = width;
+	this.height = height;
+	this.gravityPlayer = gravityPlayer;
+	this.collideWorldBounds = true;
+	this.up_button = up_button;
+	this.right_button = right_button;
+	this.left_button = left_button;
+	this.direcao = direcao;
+
+	this.getSpritesheet = function () {
+        return spritesheet;
+    };
+
+    this.getWidth = function () {
+        return width;
+    };
+
+    this.getHeight = function () {
+        return height;
+    };
+
+    this.getGravityPlayer = function () {
+        return gravityPlayer;
+    };
+
+    this.getCollideWorldBounds = function () {
+        return collideWorldBounds;
+    };
+
+		this.getUp_button = function () {
+        return up;
+    };
+
+		this.getRight_button = function () {
+        return right_button;
+    };
+
+		this.getLeft_button = function () {
+        return left_button;
+    };
+
+    this.setSpriteseet = function (value) {
+        spritesheet = value;
+    };
+
+    this.setWidth = function (value) {
+        width = value;
+    };
+
+    this.setHeight = function (value) {
+        height = value;
+    };
+
+    this.setGravityPlayer = function (value) {
+        gravityPlayer = value;
+    };
+
+    this.setCollideWorldBounds = function (value) {
+        collideWorldBounds = value;
+    };
+
+		this.setUp_button = function (value) {
+        up_button = value;
+    };
+
+		this.setRight_button = function (value) {
+        right_button = value;
+    };
+
+		this.setLeft_button = function (value) {
+        left_button = value;
+    };
+
+    this.desenhar = function() {
+
+			this.player = game.add.sprite(this.width, game.world.height-this.height, this.spritesheet);
+
+			game.physics.arcade.enable(this.player);
+
+			this.player.scale.set(.65);
+
+			this.player.body.gravity.y = this.gravityPlayer;
+
+	    this.player.body.collideWorldBounds = this.collideWorldBounds;
+
+			direita = this.player.animations.add('right', [1,0,1,0,2,3,2,3], 9, true);
+		  esquerda = this.player.animations.add('left', [5,4,5,4,6,7,6,7], 9, true);
+			puloR = this.player.animations.add('upR', [9,10,10,11,11,8,0], 25, true);
+			puloL = this.player.animations.add('upL', [13,14,14,15,15,12,4], 25, true);
+
+	    this.player.frame = frame;
+
+	    players.push(this.player);
+
+
+
+    }
+
+		this.movimento = function() {
+
+			//  Our controls.
+	    var cursors = game.input.keyboard.createCursorKeys();
+
+			if (cursors.right.isDown && !cursors.left.isDown){
+	        //  Move to the right
+					this.direcao = "R";
+					this.player.body.velocity.x = 110;
+					if (!(puloR.isPlaying || puloL.isPlaying)) {
+							this.player.animations.play('right', false, false);
+							console.log('Right');
+					}
+			} else {
+
+				console.log('Right_S');
+					direita.onComplete.add(function () {
+						this.player.animations.stop('right',true, true);
+						this.player.frame = 0;
+
+						console.log('Right_S');
+						alert('Right_S');
+					}, this.player);
+			}
+
+			if (cursors.left.isDown && !cursors.right.isDown ){
+	        //  Move to the left
+					this.direcao = "L";
+					this.player.body.velocity.x = -110;
+					if (!(puloL.isPlaying || puloR.isPlaying)) {
+							this.player.animations.play('left', false, false);
+							console.log('Left');
+					}
+	    } else {
+					esquerda.onComplete.add(function () {
+						this.player.animations.stop('left',true, true);
+						this.player.frame = 4;
+						console.log('Left_S');
+					}, this.player);
+			}
+
+			//  Allow the player to jump if they are touching the ground.
+	    if (cursors.up.isDown && this.player.body.touching.down){
+				  if (!(puloR.isPlaying || puloL.isPlaying)) {
+						this.player.body.velocity.y = -700;
+						switch (this.direcao) {
+							case "R":
+								this.player.animations.play('upR',false, false);
+								console.log('UP-R');
+								break;
+					 		case "L":
+						 		this.player.animations.play('upL',false, false);
+								console.log('UP-L');
+					 			break;
+							default:
+						  	break;
+					}
+				 }
+	    } else {
+				switch (this.direcao) {
+					case "R":
+						puloR.onComplete.add(function () {
+							this.player.animations.stop('upR',true, true);
+							console.log('UP-R_S');
+						}, this.player);
+						break;
+					case "L":
+						puloL.onComplete.add(function () {
+							this.player.animations.stop('upL',true, true);
+							console.log('UP-L_S');
+						}, this.player);
+						break;
+					default:
+						break;
+				}
+			}
+
+		}
+}
+
+function preload() {
+    game.load.image('ground', '../assets/platform.png');
+    game.load.spritesheet('robo', '../assets/robo_verde.png', 101, 101);
+}
+
+function create() {
+
+    //  We're going to be using physics, so enable the Arcade Physics system
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+
+    //  The platforms group contains the ground and the 2 ledges we can jump on
+    platforms = game.add.group();
+
+    //  We will enable physics for any object that is created in this group
+    platforms.enableBody = true;
+
+		// Here we create the ground.
+    var ground = platforms.create(0, game.world.height-20, 'ground');
+
+    //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+    ground.scale.setTo(2, 2);
+
+    //  This stops it from falling away when you jump on it
+    ground.body.immovable = true;
+
+    player = new Player('robo', 5, 200, gravityPlayer, 0, 83, 89, 79, "R");
+    player.desenhar();
+
+    player2 = new Player('robo', 450, 200, gravityPlayer, 4, 18, 33, 31, "L");
+    player2.desenhar();
+
+    alert(player2.getHeight());
+}
+
+function update() {
+	for(i = 0; i < players.length; i++) {
+		//  Collide the player and the stars with the platforms
+		game.physics.arcade.collide(players[i], platforms);
+
+		//  Reset the players velocity (movement)
+		players[i].body.velocity.x = 0;
+
+		player.movimento();
+
+		//alert(players[i].getHeight());
+	}
+}
+
+</script>
+
+</body>
+</html>
