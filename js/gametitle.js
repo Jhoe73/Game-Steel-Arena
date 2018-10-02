@@ -8,10 +8,6 @@ GameTitle.prototype = {
 		background = this.game.add.sprite(0, 0, 'background');
 		background.scale.setTo(1, 1.4);
 
-		rights = this.game.add.sprite(this.game.world.centerX, 365, 'rights');
-		rights.scale.setTo(.2, .15);
-		rights.anchor.setTo(0.5, 0);
-
 		logo = this.game.add.sprite(this.game.world.centerX, 15, 'logo');
 		logo.anchor.setTo(0.5, 0);
 
@@ -22,14 +18,15 @@ GameTitle.prototype = {
 		button_start.onInputOut.add(this.outStart, this);
 		button_start.onInputUp.add(this.upStart, this);
 
-		//button_sound = this.game.add.button(725, 350, 'button_sound', this.actionOnClickSound, this);
-		//button_sound.scale.setTo(.2, .2);
-
 		button_configs = this.game.add.button(725, 325, 'button_configs', this.actionOnClickConfigs, this);
 		button_configs.onInputOver.add(this.overConfigs, this);
 		button_configs.onInputOut.add(this.outConfigs, this);
 		button_configs.onInputUp.add(this.upConfigs, this);
 		button_configs.scale.setTo(.30, .30);
+
+		rights = game.add.text(this.game.world.centerX, 365, textRights, { font: "11px Arial", align: "center", fill: '#ffffff'});
+		rights.resolution = 2.5;
+		rights.anchor.setTo(0.5, 0);
 	},
 
 	upStart: function() {
@@ -61,12 +58,8 @@ GameTitle.prototype = {
 		this.playerSelect();
 	},
 
-	//actionOnClickSound: function() {
-		//alert("Sound");
-	//},
-
 	actionOnClickConfigs: function() {
-		alert("Config");
+		this.game.state.start("Configs");
 	},
 
 	playerSelect: function(){

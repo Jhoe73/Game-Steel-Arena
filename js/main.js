@@ -3,7 +3,6 @@ var Main = function(game){
 };
 
 var population_players = ["rbVerde", "rbVerde"];
-var controls_players = [[Phaser.Keyboard.UP, Phaser.Keyboard.RIGHT, Phaser.Keyboard.LEFT], [Phaser.Keyboard.W, Phaser.Keyboard.D, Phaser.Keyboard.A]];
 var bodyPhysic_player;
 var players = [];
 var playersObj = [];
