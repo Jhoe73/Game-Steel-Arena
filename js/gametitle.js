@@ -25,7 +25,7 @@ GameTitle.prototype = {
 		button_configs.scale.setTo(.30, .30);
 
 		rights = game.add.text(this.game.world.centerX, 365, textRights, { font: "11px Arial", align: "center", fill: '#ffffff'});
-		rights.resolution = 2.5;
+		rights.resolution = 1;
 		rights.anchor.setTo(0.5, 0);
 	},
 

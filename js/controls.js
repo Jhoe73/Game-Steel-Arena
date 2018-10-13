@@ -13,34 +13,34 @@ Controls.prototype = {
 		styleNames = { font: "20px arcade", align: "center", fill: '#ffffff'};
 
 		controlsText = game.add.text(20, 20, 'Controls: ', styleNames);
-		controlsText.resolution = 4;
+		controlsText.resolution = 1;
 
 		player1Text = game.add.text(270, 100, 'Player 1 ', styleNames);
-		player1Text.resolution = 4;
+		player1Text.resolution = 1;
 		player1Text.anchor.setTo(0, 0);
 
 		groupKeys = this.game.add.group();
 
 		for(i = 0; i<controls.length; i++){
 			action = game.add.text(270, 150+(i*30), controls[i], styleNames);
-			action.resolution = 4;
+			action.resolution = 1;
 			action.inputEnabled = true;
 			control = game.add.text(350, 150+(i*30), this.keyShow(controls_players[0][i]), styleNames, groupKeys);
-			control.resolution = 4;
+			control.resolution = 1;
 			control.inputEnabled = true;
 			control.events.onInputDown.add(this.actionOnClickControl, {key: controls_players[1][i]});
 		}
 
 		player2Text = game.add.text(450, 100, 'Player 2 ', styleNames);
-		player2Text.resolution = 4;
+		player2Text.resolution = 1;
 		player2Text.anchor.setTo(0, 0);
 
 		for(i = 0; i<controls.length; i++){
 			action = game.add.text(450, 150+(i*30), controls[i], styleNames);
-			action.resolution = 4;
+			action.resolution = 1;
 			action.inputEnabled = true;
 			control = game.add.text(530, 150+(i*30), this.keyShow(controls_players[1][i]), styleNames, groupKeys);
-			control.resolution = 4;
+			control.resolution = 1;
 			control.inputEnabled = true;
 			control.events.onInputDown.add(this.actionOnClickControl, {key: controls_players[1][i]});
 		}
@@ -51,7 +51,7 @@ Controls.prototype = {
 		button_back.scale.setTo(.25, .25);
 
 		rights = game.add.text(this.game.world.centerX, 365, textRights, { font: "11px Arial", align: "center", fill: '#ffffff'});
-		rights.resolution = 2.5;
+		rights.resolution = 1;
 		rights.anchor.setTo(0.5, 0);
 	},
 

@@ -20,13 +20,14 @@ Preload.prototype = {
 		//PlayerSelect
 		this.game.load.image('button_continue', 'assets/buttons/continue.png');
 		//Main
-		this.game.load.image('background', 'assets/cenario.png')
-    this.game.load.image('ground', 'assets/plataforma3.png');
+		this.game.load.image('background', 'assets/pics/cenario.png')
+    this.game.load.image('ground', 'assets/pics/plataforma3.png');
     //this.game.load.spritesheet('roboVerde', 'assets/robo_verde.png', 101, 101);
-		this.game.load.atlasJSONHash('cityscene', 'cityscene.png', 'cityscene.json');
-		this.game.load.atlasJSONHash('rbVerde', 'roboVerde.png', 'roboVerde.json');
-		this.game.load.physics("rbVerdePhysics", "rbVerdePhysics.json");
-		this.game.load.json("rbVerdePhysicsJSON", "rbVerdePhysics.json");
+		this.game.load.atlasJSONHash('cityscene', 'assets/pics/cityscene.png', 'assets/JSON/cityscene.json');
+		this.game.load.atlasJSONHash('rbVerde', 'assets/pics/roboVerde.png', 'assets/JSON/roboVerde.json');
+		this.game.load.atlasJSONHash('rbVermelho', 'assets/pics/roboVermelho.png', 'assets/JSON/roboVerde.json');
+		this.game.load.physics("rbVerdePhysics", "assets/JSON/rbVerdePhysics.json");
+		this.game.load.json("rbVerdePhysicsJSON", "assets/JSON/rbVerdePhysics.json");
 	},
 
 	create: function(){

@@ -1,6 +1,6 @@
-var Sound = function(game){};
+var Audio = function(game){};
 
-Sound.prototype = {
+Audio.prototype = {
 
 	create: function(game){
 
@@ -8,14 +8,14 @@ Sound.prototype = {
 
 		background = this.game.stage.backgroundColor = '#020f20';
 
-		soundTitleText = game.add.text(20, 20, 'Sound:', { font: "20px arcade", align: "center", fill: '#ffffff'});
-		soundTitleText.resolution = 4;
+		audioTitleText = game.add.text(20, 20, 'Audio:', { font: "20px arcade", align: "center", fill: '#ffffff'});
+		audioTitleText.resolution =1;
 
 		soundText = game.add.text(340, 140, 'Sound:', { font: "20px arcade", align: "center", fill: '#ffffff'});
-		soundText.resolution = 4;
+		soundText.resolution = 1;
 
 		musicText = game.add.text(340, 170, 'Music:', { font: "20px arcade", align: "center", fill: '#ffffff'});
-		musicText.resolution = 4;
+		musicText.resolution = 1;
 
 		this.drawsVolume(430, 140, volumeSound);
 
@@ -39,7 +39,7 @@ Sound.prototype = {
 		button_back.scale.setTo(.25, .25);
 
 		rights = game.add.text(this.game.world.centerX, 365, textRights, { font: "11px Arial", align: "center", fill: '#ffffff'});
-		rights.resolution = 2.5;
+		rights.resolution = 1;
 		rights.anchor.setTo(0.5, 0);
 	},
 
@@ -69,7 +69,7 @@ Sound.prototype = {
 
 	drawsVolume: function(x, y, volume) {
 		volume = game.add.text(x, y, volume, { font: "20px arcade", align: "center", fill: '#ffffff'});
-		volume.resolution = 4;
+		volume.resolution = 1;
 		volumesText.push(volume);
 	},
 

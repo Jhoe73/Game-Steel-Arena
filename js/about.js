@@ -14,15 +14,15 @@ About.prototype = {
 		styleNames = { font: "20px arcade", align: "center", fill: '#ffffff'};
 
 		msgText = game.add.text(game.world.centerX, 300, msg, { font: "30px arcade", align: "center", fill: '#f98c8c'});
-		msgText.resolution = 4;
+		msgText.resolution = 1;
 		msgText.anchor.setTo(.5, 0);
 
 		creditsText = game.add.text(20, 20, 'Credits:', styleNames);
-		creditsText.resolution = 4;
+		creditsText.resolution = 1;
 
 		for(i = 0; i<=nomes.length; i++){
 			nome = game.add.text(game.world.centerX, 120+(i*30), nomes[i], styleNames);
-			nome.resolution = 4;
+			nome.resolution = 1;
 			nome.inputEnabled = true;
 			nome.events.onInputDown.add(this.actionOnClickNames, this);
 			nome.anchor.setTo(0.5, 0);
@@ -34,7 +34,7 @@ About.prototype = {
 		button_back.scale.setTo(.25, .25);
 
 		rights = game.add.text(this.game.world.centerX, 365, textRights, { font: "11px Arial", align: "center", fill: '#ffffff'});
-		rights.resolution = 2.5;
+		rights.resolution = 1;
 		rights.anchor.setTo(0.5, 0);
 	},
 
@@ -43,8 +43,6 @@ About.prototype = {
 		if (countEgg == 8) {
 			this.EasterEgg();
 			// Stretch to fill
-	    game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-			game.scale.startFullScreen(false);
 		}
 	},
 

@@ -2,7 +2,6 @@ var Main = function(game){
 
 };
 
-var population_players = ["rbVerde", "rbVerde"];
 var bodyPhysic_player;
 var players = [];
 var playersObj = [];
@@ -74,16 +73,16 @@ Main.prototype = {
 		//  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
 
-		this.resizePolygon('rbVerdePhysics','rbVerdePhysics.80', ['rb_verde_D', 'rb_verde_E', 'rb_verde_PD3', 'rb_verde_PE3'], .50);
+		this.resizePolygon('rbVerdePhysics','rbVerdePhysics.redone', ['rb_verde_D', 'rb_verde_E', 'rb_verde_PD3', 'rb_verde_PE3'], .50);
 		//this.resizePolygon('rbVerdePhysics','rbVerdePhysics.80','rb_verde_E', .80);
 
 		for(var i = 0; i < population_players.length; i++){
-			player = new this.Player("Player"+(i+1), population_players[i], "rbVerdePhysics.80", this.playerCollisionGroup, 100+i*100, 120, gravityPlayer, i==0?4:4, controls_players[i][0], controls_players[i][1], controls_players[i][2]);
+			player = new this.Player("Player"+(i+1), population_players[i], "rbVerdePhysics.redone", this.playerCollisionGroup, 100+i*100, 120, gravityPlayer, i==0?4:4, controls_players[i][0], controls_players[i][1], controls_players[i][2]);
 	    	player.desenhar();
 				player.getPlayer().scale.set(.50);
 	    	player.formar_fisica();
 
-			playersObj.push(player);
+				playersObj.push(player);
 		}
 	},
 
@@ -234,7 +233,7 @@ Main.prototype = {
 		this.verificar_movimento = function () {
 
 			if (this.getRight_button().isDown && !this.getLeft_button().isDown){
-	        	//  Move to the right
+	      //  Move to the right
 				this.setDirecao("R");
 				this.getPlayer().body.moveRight(100);
 				if (!(this.animation_direita.isPlaying || this.animation_puloR.isPlaying || this.animation_puloL.isPlaying)) {
@@ -246,7 +245,7 @@ Main.prototype = {
 			}
 
 			if (this.getLeft_button().isDown && !this.getRight_button().isDown){
-	    		//  Move to the left
+	    	//  Move to the left
 				this.setDirecao("L");
 				this.getPlayer().body.moveLeft(100);
 				if (!(this.animation_esquerda.isPlaying || this.animation_puloL.isPlaying || this.animation_puloR.isPlaying)) {
@@ -276,9 +275,10 @@ Main.prototype = {
 					  	break;
 					}
 		 		}
-	    } else {
+	    } else if (this.animation_puloR.isPlaying || this.animation_puloL.isPlaying) {
 				switch (this.getDirecao()) {
 					case "UPR":
+					case "R":
 						this.animation_puloR.onComplete.add(function () {
 						  	this.getPlayer().frame = 0;
 								this.setDirecao("R");
@@ -286,6 +286,7 @@ Main.prototype = {
 						}, this);
 						break;
 					case "UPL":
+					case "L":
 						this.animation_puloL.onComplete.add(function () {
 						  	this.getPlayer().frame = 4;
 								this.setDirecao("L");

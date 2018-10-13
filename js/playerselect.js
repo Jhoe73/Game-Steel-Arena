@@ -6,6 +6,42 @@ PlayerSelect.prototype = {
 		background = this.game.add.sprite(0, 0, 'background');
 		background.scale.setTo(1, 1.4);
 
+		graphics = this.game.add.graphics();
+
+		// set a fill and line style
+		graphics.beginFill(0xf98c8c);
+		graphics.lineStyle(1, 0x000000, 1);
+
+		// draw a rectangle
+		spacePlayerImg1 = graphics.drawRect(120, 80, 160, 200);
+
+		playerImg1 = this.game.add.button(120, 80, 'button_continue', this.actionOnClickContinue, this);
+
+		population_players.push("rbVerde");
+
+		button_down2 = this.game.add.button(60, 160, 'triangle_left', this.actionOnClickButton_downS);
+		button_down2.scale.setTo(1, 1);
+
+		button_up1 = this.game.add.button(320, 160, 'triangle_right', this.actionOnClickButton_upS);
+		button_up1.scale.setTo(1, 1);
+
+
+
+		for(i=0;i<=20;i++){
+		//	zxc = graphics.drawRect(40*i, 100, 1, 400);
+		}
+
+
+		spacePlayerImg2 = graphics.drawRect(520, 80, 160, 200);
+
+		population_players.push("rbVermelho");
+
+		button_down2 = this.game.add.button(460, 160, 'triangle_left', this.actionOnClickButton_downS);
+		button_down2.scale.setTo(1, 1);
+
+		button_up2 = this.game.add.button(720, 160, 'triangle_right', this.actionOnClickButton_upS);
+		button_up2.scale.setTo(1, 1);
+
 		button_back = this.game.add.button(20, 370, 'button_back', this.actionOnClickGoBack);
 		button_back.onInputOver.add(this.overBack, this);
 		button_back.onInputOut.add(this.outBack, this);
