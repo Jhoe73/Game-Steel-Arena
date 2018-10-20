@@ -15,7 +15,7 @@ Preload.prototype = {
 		this.game.load.image('rights', 'assets/pics/rights.png');
 		this.game.load.image('logo', 'assets/pics/logo.png');
 		this.game.load.image('button_start', 'assets/buttons/start.png');
-		this.game.load.spritesheet('button_sound', 'assets/buttons/sound_icon.png', 275, 244);
+		this.game.load.image('button_tutorial', 'assets/buttons/tutorial.png');
 		this.game.load.image('button_configs', 'assets/buttons/configs.png');
 		//PlayerSelect
 		this.game.load.image('button_continue', 'assets/buttons/continue.png');
