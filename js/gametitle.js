@@ -3,10 +3,9 @@ var GameTitle = function(game){};
 GameTitle.prototype = {
 
 	create: function(){
-		//background = this.game.stage.backgroundColor = '#538ad4';
 
 		background = this.game.add.sprite(0, 0, 'background');
-		background.scale.setTo(1, 1.4);
+		background.scale.setTo(.5, .65);
 
 		logo = this.game.add.sprite(this.game.world.centerX, 15, 'logo');
 		logo.anchor.setTo(0.5, 0);
@@ -24,22 +23,24 @@ GameTitle.prototype = {
 		button_configs.onInputUp.add(this.upConfigs, this);
 		button_configs.scale.setTo(.30, .30);
 
-		rights = game.add.text(this.game.world.centerX, 365, textRights, { font: "11px Arial", align: "center", fill: '#ffffff'});
-		rights.resolution = 1;
+		rights = game.add.text(this.game.world.centerX, 365, textRights, titleRights);
 		rights.anchor.setTo(0.5, 0);
 	},
 
+	update: function() {
+		if (!game.scale.isFullScreen){
+			statusFull = "OFF";
+    }
+	},
+
 	upStart: function() {
-		console.log('button_start up', arguments);
 	},
 
 	overStart: function() {
-		console.log('button_start over');
 		button_start.anchor.setTo(.51, .51);
 	},
 
 	outStart: function() {
-		console.log('button_start out');
 		button_start.anchor.setTo(.5, .5);
 	},
 
@@ -59,10 +60,12 @@ GameTitle.prototype = {
 	},
 
 	actionOnClickConfigs: function() {
+		previousState = "GameTitle";
 		this.game.state.start("Configs");
 	},
 
 	playerSelect: function(){
+		previousState = "GameTitle";
 		this.game.state.start("PlayerSelect");
 	}
 

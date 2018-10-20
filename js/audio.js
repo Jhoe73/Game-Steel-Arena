@@ -43,6 +43,12 @@ Audio.prototype = {
 		rights.anchor.setTo(0.5, 0);
 	},
 
+	update: function() {
+		if (!game.scale.isFullScreen){
+			statusFull = "OFF";
+    }
+	},
+
 	actionOnClickButton_upS: function() {
 		if (volumeSound < 10) {
 			volumesText[0].setText(++volumeSound);

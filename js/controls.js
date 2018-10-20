@@ -9,38 +9,28 @@ Controls.prototype = {
 
 		background = this.game.stage.backgroundColor = '#020f20';
 
-		// Texto e Estilo
-		styleNames = { font: "20px arcade", align: "center", fill: '#ffffff'};
+		controlsText = game.add.text(20, 20, 'Controls: ', titleS);
 
-		controlsText = game.add.text(20, 20, 'Controls: ', styleNames);
-		controlsText.resolution = 1;
-
-		player1Text = game.add.text(270, 100, 'Player 1 ', styleNames);
-		player1Text.resolution = 1;
+		player1Text = game.add.text(270, 100, 'Player 1 ', titleS);
 		player1Text.anchor.setTo(0, 0);
 
 		groupKeys = this.game.add.group();
 
 		for(i = 0; i<controls.length; i++){
-			action = game.add.text(270, 150+(i*30), controls[i], styleNames);
-			action.resolution = 1;
+			action = game.add.text(270, 150+(i*30), controls[i], titleS);
 			action.inputEnabled = true;
-			control = game.add.text(350, 150+(i*30), this.keyShow(controls_players[0][i]), styleNames, groupKeys);
-			control.resolution = 1;
+			control = game.add.text(350, 150+(i*30), this.keyShow(controls_players[0][i]), titleS, groupKeys);
 			control.inputEnabled = true;
 			control.events.onInputDown.add(this.actionOnClickControl, {key: controls_players[1][i]});
 		}
 
-		player2Text = game.add.text(450, 100, 'Player 2 ', styleNames);
-		player2Text.resolution = 1;
+		player2Text = game.add.text(450, 100, 'Player 2 ', titleS);
 		player2Text.anchor.setTo(0, 0);
 
 		for(i = 0; i<controls.length; i++){
-			action = game.add.text(450, 150+(i*30), controls[i], styleNames);
-			action.resolution = 1;
+			action = game.add.text(450, 150+(i*30), controls[i], titleS);
 			action.inputEnabled = true;
-			control = game.add.text(530, 150+(i*30), this.keyShow(controls_players[1][i]), styleNames, groupKeys);
-			control.resolution = 1;
+			control = game.add.text(530, 150+(i*30), this.keyShow(controls_players[1][i]), titleS, groupKeys);
 			control.inputEnabled = true;
 			control.events.onInputDown.add(this.actionOnClickControl, {key: controls_players[1][i]});
 		}
@@ -51,8 +41,13 @@ Controls.prototype = {
 		button_back.scale.setTo(.25, .25);
 
 		rights = game.add.text(this.game.world.centerX, 365, textRights, { font: "11px Arial", align: "center", fill: '#ffffff'});
-		rights.resolution = 1;
 		rights.anchor.setTo(0.5, 0);
+	},
+
+	update: function() {
+		if (!game.scale.isFullScreen){
+			statusFull = "OFF";
+    }
 	},
 
 	keyShow: function(key) {
@@ -88,7 +83,7 @@ Controls.prototype = {
 	actionOnClickControl: function(textObj){
 		console.log(this.key);
 		textObj.alpha = 0.5;
-		
+
 	},
 
 	overBack: function() {

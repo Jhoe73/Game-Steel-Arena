@@ -14,6 +14,7 @@
 	<script type="text/javascript" src="js/controls.js"></script>
 	<script type="text/javascript" src="js/playerselect.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/player.js"></script>
 	<script type="text/javascript" src="js/gameover.js"></script>
     <style type="text/css">
         body {
@@ -23,16 +24,30 @@
     <script type="text/javascript">
 		(function() {
 
-				//Create a new game that fills the screen
 				game = new Phaser.Game(800, 400, Phaser.AUTO);
 
+				previousState = "";
+				statusFull = "OFF";
 				textRights = "© 2018, SexMachine, Inc.\nDeveloped by SexMachiners, Inc.";
-				population_players = [];
-				controls_players = [[Phaser.Keyboard.UP, Phaser.Keyboard.RIGHT, Phaser.Keyboard.LEFT, Phaser.Keyboard.SHIFT], [Phaser.Keyboard.W, Phaser.Keyboard.D, Phaser.Keyboard.A, Phaser.Keyboard.FIVE]];
+				existing_players = [
+					["rb_verde", "rb_verdePhysics"],
+					["rb_vermelho", "rb_vermelhoPhysics"]
+				];
+				population_players = [[],[]];
+				controls_players = [[Phaser.Keyboard.UP, Phaser.Keyboard.RIGHT, Phaser.Keyboard.LEFT, Phaser.Keyboard.SPACEBAR], [Phaser.Keyboard.W, Phaser.Keyboard.D, Phaser.Keyboard.A, Phaser.Keyboard.SHIFT]];
+				controls_esc = Phaser.Keyboard.ESC;
 				volumeSound = 10;
 				volumeMusic = 10;
+				titleES = { font: "15px arcade", align: "center", fill: '#ffffff'};
+				titleS = { font: "20px arcade", align: "center", fill: '#ffffff'};
+				titleM = { font: "40px arcade", align: "center", fill: '#ffffff'};
+				titleL = { font: "50px arcade", align: "center", fill: '#ffffff'};
+				titleRights = { font: "11px Arial", align: "center", fill: '#ffffff'};
+				msgRedS = { font: "20px arcade", align: "center", fill: '#c43333'};
+				msgRedM = { font: "30px arcade", align: "center", fill: '#c43333'};
+				msgRedL = { font: "50px arcade", align: "center", fill: '#c43333'};
+				winner = "";
 
-				//Add all states
 				game.state.add("Boot", Boot);
 				game.state.add("Preload", Preload);
 				game.state.add("GameTitle", GameTitle);
@@ -44,7 +59,6 @@
 				game.state.add("Main", Main);
 				game.state.add("GameOver", GameOver);
 
-				//Start the first state
 				game.state.start("Boot");
 
 		})();

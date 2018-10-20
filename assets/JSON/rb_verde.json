@@ -1,0 +1,108 @@
+{"frames": {
+
+"rbVerde00.png":
+{
+	"frame": {"x":1,"y":1,"w":99,"h":84},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":48,"w":99,"h":84},
+	"sourceSize": {"w":100,"h":145}
+},
+"rbVerde01.png":
+{
+	"frame": {"x":1,"y":87,"w":98,"h":84},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":48,"w":98,"h":84},
+	"sourceSize": {"w":100,"h":145}
+},
+"rbVerde02.png":
+{
+	"frame": {"x":1,"y":173,"w":99,"h":84},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":48,"w":99,"h":84},
+	"sourceSize": {"w":100,"h":145}
+},
+"rbVerde03.png":
+{
+	"frame": {"x":1,"y":259,"w":99,"h":84},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":48,"w":99,"h":84},
+	"sourceSize": {"w":100,"h":145}
+},
+"rbVerde04.png":
+{
+	"frame": {"x":1,"y":345,"w":98,"h":90},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":48,"w":98,"h":90},
+	"sourceSize": {"w":100,"h":145}
+},
+"rbVerde05.png":
+{
+	"frame": {"x":1,"y":437,"w":98,"h":94},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":48,"w":98,"h":94},
+	"sourceSize": {"w":100,"h":145}
+},
+"rbVerde06.png":
+{
+	"frame": {"x":1,"y":533,"w":98,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":48,"w":98,"h":97},
+	"sourceSize": {"w":100,"h":145}
+},
+"rbVerde07.png":
+{
+	"frame": {"x":1,"y":632,"w":98,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":48,"w":98,"h":97},
+	"sourceSize": {"w":100,"h":145}
+},
+"rbVerde08.png":
+{
+	"frame": {"x":1,"y":731,"w":98,"h":90},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":48,"w":98,"h":90},
+	"sourceSize": {"w":100,"h":145}
+},
+"rbVerde09.png":
+{
+	"frame": {"x":1,"y":823,"w":98,"h":94},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":48,"w":98,"h":94},
+	"sourceSize": {"w":100,"h":145}
+},
+"rbVerde10.png":
+{
+	"frame": {"x":1,"y":919,"w":98,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":48,"w":98,"h":97},
+	"sourceSize": {"w":100,"h":145}
+},
+"rbVerde11.png":
+{
+	"frame": {"x":1,"y":1018,"w":98,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":48,"w":98,"h":97},
+	"sourceSize": {"w":100,"h":145}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "rbVerde.png",
+	"format": "RGBA8888",
+	"size": {"w":101,"h":1116},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:fe77fb477020f83e9edfd8d490242e2e:92fb64007422664848198e53fe55d86e:9e5de4b234965334c29247ac67a5636f$"
+}
+}
