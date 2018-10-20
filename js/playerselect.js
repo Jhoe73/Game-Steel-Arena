@@ -177,7 +177,6 @@ PlayerSelect.prototype = {
 				personsSelected[player] = true;
 				rights[player].revive();
 		}
-		console.log(canConfirm+"confirm");
 	},
 
 	overBack: function() {
@@ -203,9 +202,7 @@ PlayerSelect.prototype = {
 
 	actionOnClickContinue: function() {
 		canContinue = false;
-		console.log(personsSelected.length+"ps");
 		for (var i = 1; i < personsSelected.length; i++) {
-			console.log(personsSelected[i]+"ps");
 			if (personsSelected[i]) {
 				canContinue = true;
 			} else {
@@ -213,7 +210,6 @@ PlayerSelect.prototype = {
 				break;
 			}
 		}
-		console.log(canContinue+"cont");
 		if (canContinue) {
 			for (var i = 0; i < personsSelected.length; i++) {
 				personsSelected[i] = false;

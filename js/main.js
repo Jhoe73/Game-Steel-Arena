@@ -17,9 +17,9 @@ Main.prototype = {
 	create: function() {
 
 		// Set the background colour to blue
-    //me.game.stage.backgroundColor = '#ccddff';
+    this.game.stage.backgroundColor = '#ffffff';
 
-		background = this.game.add.sprite(0, 0, 'cityscene', 'background');
+		//background = this.game.add.sprite(0, 0, 'cityscene', 'background');
 
 		graphics = this.game.add.graphics();
 
@@ -33,14 +33,7 @@ Main.prototype = {
 		playerImg2 = this.game.add.sprite(685, -20, population_players[1][0], 2);
 		playerImg2.scale.setTo(.6);
 
-		buttons = ["Configs", "Pause", "Exit"];
-
-		configsText = game.add.text(game.world.centerX, 10, 'Configs ', titleES);
-		configsText.anchor.setTo(.5, 0);
-		configsText.inputEnabled = true;
-		configsText.events.onInputDown.add(this.actionOnClickConfigs, this);
-
-		pauseText = game.add.text(game.world.centerX, 30, 'Pause', titleES);
+		pauseText = game.add.text(game.world.centerX, 20, 'Pause', titleES);
 		pauseText.anchor.setTo(.55, 0);
 		pauseText.inputEnabled = true;
 		pauseText.events.onInputUp.add(function () {
@@ -51,19 +44,19 @@ Main.prototype = {
 			pauseNoticeText2 = game.add.text(game.world.centerX, game.world.centerY+50, 'Click on Screen', msgRedS);
 			pauseNoticeText2.anchor.setTo(.5, 0);
 			pauseNoticeText2.resolution = 4;
-	});
+		});
 
-	game.input.onDown.add(unpause, self);
+		game.input.onDown.add(unpause, self);
 
-	function unpause(event){
-		if(game.paused){
-			pauseNoticeText.destroy();
-			pauseNoticeText2.destroy();
-			game.paused = false;
+		function unpause(event){
+			if(game.paused){
+				pauseNoticeText.destroy();
+				pauseNoticeText2.destroy();
+				game.paused = false;
+			}
 		}
-	}
 
-		exitText = game.add.text(game.world.centerX, 50, 'Exit ', titleES);
+		exitText = game.add.text(game.world.centerX, 40, 'Exit ', titleES);
 		exitText.anchor.setTo(.5, 0);
 		exitText.inputEnabled = true;
 		exitText.events.onInputDown.add(this.actionOnClickExit, this);
@@ -202,11 +195,6 @@ Main.prototype = {
 
 	render: function() {
 
-	},
-
-	actionOnClickConfigs: function(){
-		previousState = "Main";
-		this.game.state.start('Configs');
 	},
 
 	actionOnClickExit: function(){
