@@ -18,12 +18,12 @@ Preload.prototype = {
 		this.game.load.image('button_continue', 'assets/buttons/continue.png');
 		this.game.load.image('right', 'assets/pics/right.png');
 		//Main
-		this.game.load.image('background', 'assets/pics/cenario.png')
+		this.game.load.image('background2', 'assets/pics/cenario.jpg');
     this.game.load.image('ground', 'assets/pics/plataforma3.png');
+		this.game.load.image('ground2', 'assets/pics/ptf.png');
 		this.game.load.image('bullet', 'assets/pics/wrench_right.png');
 		this.game.load.image('bullet_up', 'assets/pics/wrench_up.png');
 		this.game.load.image('coin', 'assets/pics/coin.png');
-		this.game.load.atlasJSONHash('cityscene', 'assets/pics/cityscene.png', 'assets/JSON/cityscene.json');
 		this.game.load.atlasJSONHash('rb_verde', 'assets/pics/rb_verde.png', 'assets/JSON/rb_verde.json');
 		this.game.load.atlasJSONHash('rb_vermelho', 'assets/pics/rb_vermelho.png', 'assets/JSON/rb_vermelho.json');
 		this.game.load.physics("rb_verdePhysics", "assets/JSON/rb_verdePhysics.json");

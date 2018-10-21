@@ -36,7 +36,7 @@ function Player(playerName, spritesheet, physicsKey, collisionGroup, width, heig
 	this.number_of_bullets = 3;
 	this.number_of_kills = 0;
 	this.SHOT_DELAY = 200;
-	this.BULLET_SPEED = 800;
+	this.BULLET_SPEED = 900;
 	this.GRAVITY = 1800;
 
 	//Getters
@@ -158,7 +158,7 @@ function Player(playerName, spritesheet, physicsKey, collisionGroup, width, heig
 		if (this.getRight_button().isDown && !this.getLeft_button().isDown){
       //  Move to the right
 			this.setDirecao("R");
-			this.getPlayer().body.moveRight(100);
+			this.getPlayer().body.moveRight(150);
 			if (!(this.animation_direita.isPlaying || this.animation_puloR.isPlaying || this.animation_puloL.isPlaying)) {
 				this.getPlayer().animations.play('right', false, false);
 				if (!(this.corrent_physic == this.getPhysic_direita())) {
@@ -173,7 +173,7 @@ function Player(playerName, spritesheet, physicsKey, collisionGroup, width, heig
 		if (this.getLeft_button().isDown && !this.getRight_button().isDown){
     	//  Move to the left
 			this.setDirecao("L");
-			this.getPlayer().body.moveLeft(100);
+			this.getPlayer().body.moveLeft(150);
 			if (!(this.animation_esquerda.isPlaying || this.animation_puloL.isPlaying || this.animation_puloR.isPlaying)) {
 				this.getPlayer().animations.play('left', false, false);
 				if (!(this.corrent_physic === this.getPhysic_esquerda())) {
@@ -242,8 +242,8 @@ function Player(playerName, spritesheet, physicsKey, collisionGroup, width, heig
 				this.lastBulletShotAt = game.time.now;
 
 				var bullet = this.bulletsGroup.create(400, 200, 'bullet');
-				bullet.anchor.setTo(0.5, 0.5);
-				bullet.scale.setTo(0.25, 0.25);
+				bullet.anchor.setTo(0.5);
+				bullet.scale.setTo(0.40);
 
 				game.physics.p2.enable(bullet, false);
 
@@ -251,7 +251,7 @@ function Player(playerName, spritesheet, physicsKey, collisionGroup, width, heig
 
 				bullet.body.immovable = false;
 
-				bullet.body.data.gravityScale = 0.22;
+				bullet.body.data.gravityScale = 0.20;
 
 				bullet.body.setCollisionGroup(bulletCollisionGroup);
 
@@ -263,10 +263,10 @@ function Player(playerName, spritesheet, physicsKey, collisionGroup, width, heig
 				bullet.outOfBoundsKill = true;
 
 				if(this.getDirecao() == "L" || this.getDirecao() == "UPL"){
-					bullet.reset(this.getPlayer().x-35, this.getPlayer().y-5);
+					bullet.reset(this.getPlayer().x-45, this.getPlayer().y-5);
 					bullet.rotation = 3.2;
 				} else if (this.getDirecao() == "R" || this.getDirecao() == "UPR") {
-					bullet.reset(this.getPlayer().x+35, this.getPlayer().y-5);
+					bullet.reset(this.getPlayer().x+45, this.getPlayer().y-5);
 					bullet.rotation = -0.06;
 				}
 

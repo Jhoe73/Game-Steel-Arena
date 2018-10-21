@@ -7,32 +7,32 @@ GameOver.prototype = {
   create: function(){
     background = this.game.stage.backgroundColor = '#020f20';
 
-    controlsText = game.add.text(game.world.centerX, 70, 'Congratulations!!! ', msgRedL);
-    controlsText.anchor.setTo(.5, 1);
+    congratulationsText = game.add.text(game.world.centerX, 150, 'Congratulations!!! ', msgRedEL);
+    congratulationsText.anchor.setTo(.5, 1);
 
-    winnerImg = this.game.add.sprite(game.world.centerX, 210, winner.key);
-		winnerImg.scale.setTo(1);
+    winnerImg = this.game.add.sprite(game.world.centerX, 510, winner.key);
+		winnerImg.scale.setTo(2);
     winnerImg.anchor.setTo(.5, 1);
 
-    trophyImg = this.game.add.sprite(game.world.centerX-200, 200, 'trophy');
-		trophyImg.scale.setTo(.8);
+    trophyImg = this.game.add.sprite(game.world.centerX-350, 510, 'trophy');
+		trophyImg.scale.setTo(2);
     trophyImg.anchor.setTo(0, 1);
 
-    trophyImg = this.game.add.sprite(game.world.centerX+200, 200, 'trophy');
-		trophyImg.scale.setTo(.8);
+    trophyImg = this.game.add.sprite(game.world.centerX+350, 510, 'trophy');
+		trophyImg.scale.setTo(2);
     trophyImg.anchor.setTo(1, 1);
 
-    restartText = game.add.text(game.world.centerX, 250, 'Restart ', titleM);
+    restartText = game.add.text(game.world.centerX, 700, 'Restart ', titleEL);
 		restartText.anchor.setTo(.5, 0);
 		restartText.inputEnabled = true;
 		restartText.events.onInputDown.add(this.restartGame, this);
 
-    playerSelectText = game.add.text(game.world.centerX, 290, 'Player Select ', titleM);
+    playerSelectText = game.add.text(game.world.centerX, 800, 'Player Select ', titleEL);
 		playerSelectText.anchor.setTo(.5, 0);
 		playerSelectText.inputEnabled = true;
 		playerSelectText.events.onInputDown.add(this.playerSelect, this);
 
-    exitText = game.add.text(game.world.centerX, 330, 'Exit ', titleM);
+    exitText = game.add.text(game.world.centerX, 900, 'Exit ', titleEL);
 		exitText.anchor.setTo(.5, 0);
 		exitText.inputEnabled = true;
 		exitText.events.onInputDown.add(this.exitGame, this);
