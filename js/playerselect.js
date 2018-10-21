@@ -137,6 +137,7 @@ PlayerSelect.prototype = {
 			for (var i = 0; i < existing_players.length; i++) {
 				if ((existing_players[i][0] != playersImg[player].key) && (personsSelected[player] == false || personsSelected[player] == undefined)) {
 					newPlayerImg = this.game.add.sprite(playersImg[player].x, playersImg[player].y, existing_players[i][0], player==1?0:2);
+					newPlayerImg.scale.setTo(2);
 					change();
 					break;
 				}
@@ -148,6 +149,7 @@ PlayerSelect.prototype = {
 						playersImg[player].key != playersImg[i].key
 					}
 					newPlayerImg = this.game.add.sprite(playersImg[player].x, playersImg[player].y, existing_players[i-1][0], player==1?0:2);
+					newPlayerImg.scale.setTo(2);
 					change();
 					break;
 				}
