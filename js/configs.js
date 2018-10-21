@@ -6,37 +6,37 @@ Configs.prototype = {
 
 		abas = ["Controls", "Audio", "Credits"];
 
-		background = this.game.stage.backgroundColor = '#020f20';
-		
-		fullScreenText = game.add.text(615, 20, 'Fullscreen '+statusFull, titleS = titleS);
+		background = game.stage.backgroundColor = '#020f20';
+
+		fullScreenText = game.add.text(1450, 50, 'Fullscreen '+statusFull, titleL);
 		fullScreenText.resolution = 1;
 		fullScreenText.inputEnabled = true;
 		fullScreenText.events.onInputDown.add(this.actionOnClickFullScreen, this);
 
-		controls = this.game.add.text(60, game.world.centerY, abas[0], titleM);
+		controls = game.add.text(game.world.centerX-600, game.world.centerY, abas[0], titleEL);
 		controls.resolution = 1;
-		controls.anchor.setTo(.0, .5);
+		controls.anchor.setTo(.5, .5);
 		controls.inputEnabled = true;
 		controls.events.onInputDown.add(this.actionOnClickControls, this);
 
-		audio = this.game.add.text(350, game.world.centerY, abas[1], titleM);
-		audio.anchor.setTo(.0, .5);
+		audio = game.add.text(game.world.centerX, game.world.centerY, abas[1], titleEL);
+		audio.anchor.setTo(.5, .5);
 		audio.resolution = 1;
 		audio.inputEnabled = true;
 		audio.events.onInputDown.add(this.actionOnClickAudio, this);
 
-		credits = this.game.add.text(550, game.world.centerY, abas[2], titleM);
-		credits.anchor.setTo(.0, .5);
+		credits = game.add.text(game.world.centerX+600, game.world.centerY, abas[2], titleEL);
+		credits.anchor.setTo(.5, .5);
 		credits.resolution = 1;
 		credits.inputEnabled = true;
 		credits.events.onInputDown.add(this.actionOnClickCredits, this);
 
-		button_back = this.game.add.button(20, 370, 'button_back', this.actionOnClickGoBack);
+		button_back = game.add.button(80, 950, 'button_back', this.actionOnClickGoBack);
 		button_back.onInputOver.add(this.overBack, this);
 		button_back.onInputOut.add(this.outBack, this);
-		button_back.scale.setTo(.25, .25);
+		button_back.scale.setTo(.7);
 
-		rights = this.game.add.text(this.game.world.centerX, 365, textRights, titleRights);
+		rights = game.add.text(game.world.centerX, 1000, textRights, titleRights);
 		rights.anchor.setTo(0.5, 0);
 	},
 
@@ -60,15 +60,15 @@ Configs.prototype = {
 	},
 
 	actionOnClickControls: function(){
-		this.game.state.start("Controls");
+		game.state.start("Controls");
 	},
 
 	actionOnClickAudio: function(){
-		this.game.state.start("Audio");
+		game.state.start("Audio");
 	},
 
 	actionOnClickCredits: function(){
-		this.game.state.start("About");
+		game.state.start("About");
 	},
 
 	overBack: function() {
@@ -80,6 +80,6 @@ Configs.prototype = {
 	},
 
 	actionOnClickGoBack: function(){
-		this.game.state.start(previousState);
+		game.state.start(previousState);
 	}
 }

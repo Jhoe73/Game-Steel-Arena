@@ -9,38 +9,38 @@ Controls.prototype = {
 
 		background = this.game.stage.backgroundColor = '#020f20';
 
-		controlsText = game.add.text(20, 20, 'Controls: ', titleS);
+		controlsText = game.add.text(80, 50, 'Controls: ', titleL);
 
-		player1Text = game.add.text(270, 100, 'Player 1 ', titleS);
+		player1Text = game.add.text(570, 300, 'Player 1 ', titleM);
 		player1Text.anchor.setTo(0, 0);
 
 		groupKeys = this.game.add.group();
 
 		for(i = 0; i<controls.length; i++){
-			action = game.add.text(270, 150+(i*30), controls[i], titleS);
+			action = game.add.text(570, 450+(i*50), controls[i], titleM);
 			action.inputEnabled = true;
-			control = game.add.text(350, 150+(i*30), this.keyShow(controls_players[0][i]), titleS, groupKeys);
+			control = game.add.text(750, 450+(i*50), this.keyShow(controls_players[0][i]), titleM, groupKeys);
 			control.inputEnabled = true;
 			control.events.onInputDown.add(this.actionOnClickControl, {key: controls_players[1][i]});
 		}
 
-		player2Text = game.add.text(450, 100, 'Player 2 ', titleS);
+		player2Text = game.add.text(1150, 300, 'Player 2 ', titleM);
 		player2Text.anchor.setTo(0, 0);
 
 		for(i = 0; i<controls.length; i++){
-			action = game.add.text(450, 150+(i*30), controls[i], titleS);
+			action = game.add.text(1150, 450+(i*50), controls[i], titleM);
 			action.inputEnabled = true;
-			control = game.add.text(530, 150+(i*30), this.keyShow(controls_players[1][i]), titleS, groupKeys);
+			control = game.add.text(1310, 450+(i*50), this.keyShow(controls_players[1][i]), titleM, groupKeys);
 			control.inputEnabled = true;
 			control.events.onInputDown.add(this.actionOnClickControl, {key: controls_players[1][i]});
 		}
 
-		button_back = this.game.add.button(20, 370, 'button_back', this.actionOnClickGoBack);
+		button_back = game.add.button(80, 950, 'button_back', this.actionOnClickGoBack);
 		button_back.onInputOver.add(this.overBack, this);
 		button_back.onInputOut.add(this.outBack, this);
-		button_back.scale.setTo(.25, .25);
+		button_back.scale.setTo(.7);
 
-		rights = game.add.text(this.game.world.centerX, 365, textRights, { font: "11px Arial", align: "center", fill: '#ffffff'});
+		rights = game.add.text(game.world.centerX, 1000, textRights, titleRights);
 		rights.anchor.setTo(0.5, 0);
 	},
 

@@ -9,76 +9,81 @@ var rights = [];
 PlayerSelect.prototype = {
 
 	create: function(){
-		background = this.game.add.sprite(0, 0, 'background');
-		background.scale.setTo(.5, .65);
+		background = game.add.sprite(0, 0, 'background');
+		background.scale.setTo(1, 1.8);
 
 		graphics = this.game.add.graphics();
 		graphics.beginFill(0x59677e);
 		graphics.lineStyle(4, 0x04ebd6, 1);
 
-		playerImg1 = this.game.add.sprite(150, 90, 'rb_verde', 0);
+		playerImg1 = this.game.add.sprite(game.world.centerX-500, 300, 'rb_verde', 0);
+		playerImg1.scale.setTo(2);
 		playersImg[1] = playerImg1;
-		right1 = this.game.add.sprite(200, 180, 'right');
+		right1 = this.game.add.sprite(game.world.centerX-410, 450, 'right');
+		right1.scale.setTo(2);
 		right1.kill();
 		rights[1] = right1;
 
 		population_players[0].push(existing_players[0][0],existing_players[0][1]);
 
-		changeP1L = drawTriangle(90, 150, 0x59677e, 0x04ebd6, "l");
+		changeP1L = drawTriangle(game.world.centerX-600, 420, 0x59677e, 0x04ebd6, "l");
 		changeP1L.events.onInputDown.add(function(){this.changePerson("1", "l")}, this);
-		changeP1R = drawTriangle(310, 150, 0x59677e, 0x04ebd6, "r");
+		changeP1R = drawTriangle(game.world.centerX-200, 420, 0x59677e, 0x04ebd6, "r");
 		changeP1R.events.onInputDown.add(function(){this.changePerson("1", "r")}, this);
 
-		playerImg2 = this.game.add.sprite(550, 90, 'rb_vermelho', 2);
+		playerImg2 = this.game.add.sprite(game.world.centerX+350, 300, 'rb_vermelho', 2);
+		playerImg2.scale.setTo(2);
 		playersImg[2] = playerImg2;
-		right2 = this.game.add.sprite(600, 180, 'right');
+		right2 = this.game.add.sprite(game.world.centerX+450, 450, 'right');
+		right2.scale.setTo(2);
 		right2.kill();
 		rights[2] = right2;
 
 		population_players[1].push(existing_players[1][0],existing_players[1][1]);
 
-		changeP2L = drawTriangle(490, 150, 0x59677e, 0x04ebd6, "l");
+		changeP2L = drawTriangle(game.world.centerX+250, 420, 0x59677e, 0x04ebd6, "l");
 		changeP2L.events.onInputDown.add(function(){this.changePerson("2", "l")}, this);
 
-		changeP2R = drawTriangle(710, 150, 0x59677e, 0x04ebd6, "r");
+		changeP2R = drawTriangle(game.world.centerX+650, 420, 0x59677e, 0x04ebd6, "r");
 		changeP2R.events.onInputDown.add(function(){this.changePerson("2", "r")}, this);
 
-		spaceConfirmImg1 = drawRetangle(120, 290, 160, 30, 0x59677e, 0x04ebd6);
+		spaceConfirmImg1 = drawRetangle(game.world.centerX-550, 650, 300, 50, 0x59677e, 0x04ebd6);
 		spaceConfirmImg1.events.onInputDown.add(function(){this.actionOnClickConfirmText(1)}, this);
 		personsSelected[1] = false;
 
-		confirmText1 = game.add.text(145, 295, 'Confirmar ', titleS);
+		confirmText1 = game.add.text(game.world.centerX-510, 655, 'Confirmar ', titleM);
 		confirmText1.inputEnabled = true;
 		confirmText1.input.useHandCursor = true;
 		confirmText1.events.onInputDown.add(function(){this.actionOnClickConfirmText(1)}, this);
 
-		spaceConfirmImg2 = drawRetangle(520, 290, 160, 30, 0x59677e, 0x04ebd6);
+		spaceConfirmImg2 = drawRetangle(game.world.centerX+300, 650, 300, 50, 0x59677e, 0x04ebd6);
 		spaceConfirmImg2.events.onInputDown.add(function(){this.actionOnClickConfirmText(2)}, this);
 
-		confirmText2 = game.add.text(545, 295, 'Confirmar ', titleS);
+		confirmText2 = game.add.text(game.world.centerX+340, 655, 'Confirmar ', titleM);
 		confirmText2.inputEnabled = true;
 		confirmText2.input.useHandCursor = true;
 		confirmText2.events.onInputDown.add(function(){this.actionOnClickConfirmText(2)}, this);
 		personsSelected[2] = false;
 
-		button_back = this.game.add.button(20, 370, 'button_back', this.actionOnClickGoBack);
+		button_back = game.add.button(80, 950, 'button_back', this.actionOnClickGoBack);
 		button_back.onInputOver.add(this.overBack, this);
 		button_back.onInputOut.add(this.outBack, this);
-		button_back.scale.setTo(.25, .25);
+		button_back.scale.setTo(.7);
 
-		button_continue = this.game.add.button(685, 370, 'button_continue', this.actionOnClickContinue, this);
+		button_continue = this.game.add.button(1850, 950, 'button_continue', this.actionOnClickContinue, this);
 		button_continue.onInputOver.add(this.overContinue, this);
 		button_continue.onInputOut.add(this.outContinue, this);
-		button_continue.scale.setTo(.25, .25);
+		button_continue.scale.setTo(.7);
+		button_continue.anchor.setTo(1, 0);
 
 		function drawTriangle(x, y, fill, style, direction) {
 
-			direction == "r"?x1=x+20:x1=x-20;
+			direction == "r"?x1=x+40:x1=x-40;
 
 			poly = new Phaser.Polygon([
 				new Phaser.Point(x, y),
-				new Phaser.Point(x, y+60),
-				new Phaser.Point(x1, y+30),
+				new Phaser.Point(x, y+120),
+				new Phaser.Point(x1, y+60),
 				new Phaser.Point(x, y)
 			]);
 
@@ -193,11 +198,11 @@ PlayerSelect.prototype = {
 	},
 
 	overContinue: function() {
-		button_continue.anchor.setTo(.01, .01);
+		button_continue.anchor.setTo(1.01, .01);
 	},
 
 	outContinue: function() {
-		button_continue.anchor.setTo(0, 0);
+		button_continue.anchor.setTo(1, 0);
 	},
 
 	actionOnClickContinue: function() {

@@ -5,9 +5,6 @@ Preload.prototype = {
 	preload: function(){
 		//Configs
 		this.game.load.image('bender', 'assets/pics/bender.png');
-			//Sound
-			this.game.load.image('triangle_left', 'assets/pics/triangle_left.png');
-			this.game.load.image('triangle_right', 'assets/pics/triangle_right.png');
 			//Credits
 			this.game.load.image('button_back', 'assets/buttons/back.png');
 		//GameTitle

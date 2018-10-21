@@ -8,39 +8,60 @@ Audio.prototype = {
 
 		background = this.game.stage.backgroundColor = '#020f20';
 
-		audioTitleText = game.add.text(20, 20, 'Audio:', { font: "20px arcade", align: "center", fill: '#ffffff'});
-		audioTitleText.resolution =1;
+		audioTitleText = game.add.text(80, 50, 'Audio:', titleL);
 
-		soundText = game.add.text(340, 140, 'Sound:', { font: "20px arcade", align: "center", fill: '#ffffff'});
-		soundText.resolution = 1;
+		soundText = game.add.text(830, 350, 'Sound:', titleM);
 
-		musicText = game.add.text(340, 170, 'Music:', { font: "20px arcade", align: "center", fill: '#ffffff'});
-		musicText.resolution = 1;
+		musicText = game.add.text(830, 450, 'Music:', titleM);
 
-		this.drawsVolume(430, 140, volumeSound);
+		this.drawsVolume(1050, 350, volumeSound);
 
-		button_downS = this.game.add.button(415, 143, 'triangle_left', this.actionOnClickButton_downS);
-		button_downS.scale.setTo(.25, .25);
+		button_downS = drawTriangle(1030, 360, 0xffffff, 0xffffff, "l");
+		button_downS.events.onInputDown.add(this.actionOnClickButton_downS, this);
 
-		button_upS = this.game.add.button(455, 143, 'triangle_right', this.actionOnClickButton_upS);
-		button_upS.scale.setTo(.25, .25);
+		button_upS = drawTriangle(1100, 360, 0xffffff, 0xffffff, "r");
+		button_upS.events.onInputDown.add(this.actionOnClickButton_upS, this);
 
-		this.drawsVolume(430, 170, volumeMusic);
+		this.drawsVolume(1050, 450, volumeMusic);
 
-		button_downM = this.game.add.button(415, 173, 'triangle_left', this.actionOnClickButton_downM);
-		button_downM.scale.setTo(.25, .25);
+		button_downM = drawTriangle(1030, 460, 0xffffff, 0xffffff, "l");
+		button_downM.events.onInputDown.add(this.actionOnClickButton_downM, this);
 
-		button_upM = this.game.add.button(455, 173, 'triangle_right', this.actionOnClickButton_upM);
-		button_upM.scale.setTo(.25, .25);
+		button_upM = drawTriangle(1100, 460, 0xffffff, 0xffffff, "r");
+		button_upM.events.onInputDown.add(this.actionOnClickButton_upM, this);
 
-		button_back = this.game.add.button(20, 370, 'button_back', this.actionOnClickGoBack);
+		button_back = game.add.button(80, 950, 'button_back', this.actionOnClickGoBack);
 		button_back.onInputOver.add(this.overBack, this);
 		button_back.onInputOut.add(this.outBack, this);
-		button_back.scale.setTo(.25, .25);
+		button_back.scale.setTo(.7);
 
-		rights = game.add.text(this.game.world.centerX, 365, textRights, { font: "11px Arial", align: "center", fill: '#ffffff'});
-		rights.resolution = 1;
+		rights = game.add.text(game.world.centerX, 1000, textRights, titleRights);
 		rights.anchor.setTo(0.5, 0);
+
+		function drawTriangle(x, y, fill, style, direction) {
+
+			direction == "r"?x1=x+10:x1=x-10;
+
+			poly = new Phaser.Polygon([
+				new Phaser.Point(x, y),
+				new Phaser.Point(x, y+20),
+				new Phaser.Point(x1, y+10),
+				new Phaser.Point(x, y)
+			]);
+
+	    draw = this.game.add.graphics();
+
+	    draw.beginFill(fill);
+	    draw.lineStyle(2, style, 1);
+			draw.drawPolygon(poly.points);
+	    draw.endFill();
+			draw.hitArea = poly;
+			draw.inputEnabled = true;
+			draw.input.useHandCursor = true;
+
+			return draw;
+
+		}
 	},
 
 	update: function() {
@@ -74,8 +95,7 @@ Audio.prototype = {
 	},
 
 	drawsVolume: function(x, y, volume) {
-		volume = game.add.text(x, y, volume, { font: "20px arcade", align: "center", fill: '#ffffff'});
-		volume.resolution = 1;
+		volume = game.add.text(x, y, volume, titleM);
 		volumesText.push(volume);
 	},
 
