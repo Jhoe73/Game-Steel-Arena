@@ -149,8 +149,16 @@ Main.prototype = {
 		change_bullet_scoregorund();
 		change_kills_scoregorund();
 
-    this.game.input.activePointer.x = this.game.width/2;
-    this.game.input.activePointer.y = this.game.height/2;
+		if (musicPlaying) {
+			music.stop();
+			musicPlaying = false;
+			music = "";
+		}
+
+		start_gameSound = game.add.audio('start_game');
+		start_gameSound.play();
+		start_gameSound.volume = volumeSound*0.1;
+
 	},
 
 	update: function() {

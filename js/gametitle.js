@@ -32,6 +32,14 @@ GameTitle.prototype = {
 
 		rights = game.add.text(game.world.centerX, 1000, textRights, titleRights);
 		rights.anchor.setTo(0.5, 0);
+
+		if (!musicPlaying) {
+			musicPlaying = true;
+			music = game.add.audio('music1');
+			music.play();
+			music.volume = volumeMusic*.05;
+			music.loopFull();
+		}
 	},
 
 	update: function() {

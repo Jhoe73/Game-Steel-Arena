@@ -273,6 +273,10 @@ function Player(playerName, spritesheet, physicsKey, collisionGroup, width, heig
 				bullet.body.velocity.x = Math.cos(bullet.rotation) * this.getBULLET_SPEED();
 				bullet.body.velocity.y = Math.sin(bullet.rotation) * this.getBULLET_SPEED();
 
+				shootSound = game.add.audio('shoot');
+				shootSound.play();
+				shootSound.volume = volumeSound*0.065;
+
 				this.number_of_bullets--;
 				change_bullet_scoregorund();
 			}
@@ -290,6 +294,9 @@ function Player(playerName, spritesheet, physicsKey, collisionGroup, width, heig
 		if (!bullet.hasCollided) {
 			player.sprite.kill();
 			this.number_of_kills++;
+			coinSound = game.add.audio('coin');
+			coinSound.play();
+			coinSound.volume = volumeSound*0.1;
 			if (this.number_of_kills < 3) {
 				change_kills_scoregorund();
 				change_round();
@@ -305,6 +312,9 @@ function Player(playerName, spritesheet, physicsKey, collisionGroup, width, heig
 		if (!bullet.hasCollided) {
 			bullet.clearShapes();
 			bullet.sprite.kill();
+			bullet_collectSound = game.add.audio('bullet_collect');
+			bullet_collectSound.play();
+			bullet_collectSound.volume = volumeSound*0.08;
 			coletor = player.sprite.name.replace(/[^0-9]/g,'');
 	    coletor = parseInt(coletor);
 			playersObj[coletor-1].number_of_bullets++;
@@ -332,6 +342,10 @@ function Player(playerName, spritesheet, physicsKey, collisionGroup, width, heig
 		bullet.sprite.body.collides(playerCollisionGroup, this.player_on_bullet, this);
 		bullet.sprite.body.collides(groundCollisionGroup);
 		bullet.sprite.body.collides(bulletCollisionGroup);
+
+		bullet_collisionSound = game.add.audio('bullet_collision');
+		bullet_collisionSound.play();
+		bullet_collisionSound.volume = volumeSound*0.04;
 	}
 
 	this.bullet_on_bullet = function (bullet, bullet2) {
@@ -351,6 +365,10 @@ function Player(playerName, spritesheet, physicsKey, collisionGroup, width, heig
 			bullet2.sprite.body.collides(playerCollisionGroup, this.player_on_bullet, this);
 			bullet2.sprite.body.collides(groundCollisionGroup);
 			bullet2.sprite.body.collides(bulletCollisionGroup);
+
+			bullet_collisionSound = game.add.audio('bullet_collision');
+			bullet_collisionSound.play();
+			bullet_collisionSound.volume = volumeSound*0.04;
 
 			bullet.hasCollidedB = true;
 		}

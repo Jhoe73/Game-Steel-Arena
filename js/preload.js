@@ -8,7 +8,7 @@ Preload.prototype = {
 			//Credits
 			this.game.load.image('button_back', 'assets/buttons/back.png');
 		//GameTitle
-		this.game.load.image('background', 'assets/pics/backgrond.gif');
+		this.game.load.image('background', 'assets/pics/background.gif');
 		this.game.load.image('rights', 'assets/pics/rights.png');
 		this.game.load.image('logo', 'assets/pics/logo.png');
 		this.game.load.image('button_start', 'assets/buttons/start.png');
@@ -31,7 +31,16 @@ Preload.prototype = {
 		this.game.load.physics("rb_vermelhoPhysics", "assets/JSON/rb_vermelhoPhysics.json");
 		this.game.load.json("rb_vermelhoPhysicsJSON", "assets/JSON/rb_vermelhoPhysics.json");
 		//GameOver
-		this.game.load.image('trophy', 'assets/pics/trophy.png')
+		this.game.load.image('trophy', 'assets/pics/trophy.png');
+
+		game.load.audio('music1', ['assets/audio/menumusic.mp3', 'assets/audio/menumusic.ogg']);
+		game.load.audio('music2', ['assets/audio/menumusic2.wav', 'assets/audio/menumusic2.ogg']);
+		game.load.audio('start_game', ['assets/audio/start_game.wav', 'assets/audio/start_game.ogg']);
+		game.load.audio('coin', ['assets/audio/coin.wav', 'assets/audio/coin.ogg']);
+		game.load.audio('bullet_collect', ['assets/audio/bullet_collect.wav', 'assets/audio/bullet_collect.ogg']);
+		game.load.audio('bullet_collision', ['assets/audio/bullet_collision.wav', 'assets/audio/bullet_collision.ogg']);
+		game.load.audio('shoot', ['assets/audio/shoot.wav', 'assets/audio/shoot.ogg']);
+		game.load.audio('applause', ['assets/audio/applause.wav', 'assets/audio/applause.ogg']);
 	},
 
 	create: function(){

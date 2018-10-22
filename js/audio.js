@@ -73,24 +73,32 @@ Audio.prototype = {
 	actionOnClickButton_upS: function() {
 		if (volumeSound < 10) {
 			volumesText[0].setText(++volumeSound);
+
 		}
 	},
 
 	actionOnClickButton_downS: function() {
 		if (volumeSound > 0) {
 			volumesText[0].setText(--volumeSound);
+
 		}
 	},
 
 	actionOnClickButton_upM: function() {
 		if (volumeMusic < 10) {
 			volumesText[1].setText(++volumeMusic);
+			if (music.volume <= .45) {
+				music.volume += 0.05;
+			}
 		}
 	},
 
 	actionOnClickButton_downM: function() {
 		if (volumeMusic > 0) {
 			volumesText[1].setText(--volumeMusic);
+			if (music.volume >= 0.05) {
+				music.volume -= 0.05;
+			}
 		}
 	},
 

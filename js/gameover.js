@@ -37,6 +37,9 @@ GameOver.prototype = {
 		exitText.inputEnabled = true;
 		exitText.events.onInputDown.add(this.exitGame, this);
 
+    applauseSound = game.add.audio('applause');
+    applauseSound.play();
+    applauseSound.volume = volumeSound*0.08;
 	},
 
   update: function() {
