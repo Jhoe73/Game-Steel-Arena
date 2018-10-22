@@ -121,7 +121,7 @@ function Player(playerName, spritesheet, physicsKey, collisionGroup, width, heig
 
 	this.desenhar = function() {
 
-		this.setPlayer(game.add.sprite(this.getWidth(), game.world.height-this.getHeight(), this.getSpritesheet()));
+		this.setPlayer(game.add.sprite(this.getWidth(), this.getHeight(), this.getSpritesheet()));
 
 		this.getPlayer().name = this.getPlayerName();
 

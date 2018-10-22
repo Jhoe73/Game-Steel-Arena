@@ -131,12 +131,12 @@ Main.prototype = {
 
 		for(var i = 0; i < population_players.length; i++){
 			if(!(population_players[i][1] == population_players[i][0]+"Physics.redone")){
-				resizePolygon(population_players[i][1],population_players[i][1]+'.redone', [population_players[i][0]+'_D', population_players[i][0]+'_E', population_players[i][0]+'_PD4', population_players[i][0]+'_PE4'], .6);
+				resizePolygon(population_players[i][1],population_players[i][1]+'.redone', [population_players[i][0]+'_D', population_players[i][0]+'_E', population_players[i][0]+'_PD4', population_players[i][0]+'_PE4'], .7);
 				population_players[i][1] = population_players[i][1]+'.redone';
 			}
-			var player = new Player("Player"+(i+1), population_players[i][0], population_players[i][1], playerCollisionGroup, 50+i*1800, 200, gravityPlayer, i==0?0:2, controls_players[i][0], controls_players[i][1], controls_players[i][2], controls_players[i][3]);
+			var player = new Player("Player"+(i+1), population_players[i][0], population_players[i][1], playerCollisionGroup, 50+i*1800, 250, gravityPlayer, i==0?0:2, controls_players[i][0], controls_players[i][1], controls_players[i][2], controls_players[i][3]);
 	    	player.desenhar();
-				player.getPlayer().scale.set(.6);
+				player.getPlayer().scale.set(.7);
 	    	player.formar_fisica();
 				player.create_bullet();
 				players.push(player.getPlayer());
