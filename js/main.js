@@ -91,7 +91,7 @@ Main.prototype = {
 		ground = createGround(100, 380, .08, .3, 'ground2');
 		groundGroup.add(ground);
 
-		ground = createGround(1000, 380, .06, .3, 'ground2');
+		ground = createGround(1065, 380, .065, .3, 'ground2');
 		groundGroup.add(ground);
 
 		ground = createGround(1900, 380, .07, .3, 'ground2');
@@ -106,10 +106,10 @@ Main.prototype = {
 		ground = createGround(1850, 660, .04, .3, 'ground2');
 		groundGroup.add(ground);
 
-		ground = createGround(100, 635, .08, .3, 'ground2');
+		ground = createGround(120, 635, .08, .3, 'ground2');
 		groundGroup.add(ground);
 
-		ground = createGround(950, 650, .04, .3, 'ground2');
+		ground = createGround(1000, 650, .04, .3, 'ground2');
 		groundGroup.add(ground);
 
 		ground = createGround(930, 790, .09, .3, 'ground2');
