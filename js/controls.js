@@ -147,6 +147,7 @@ Controls.prototype = {
 	},
 
 	actionOnClickGoBack: function () {
+		game.input.keyboard.onDownCallback = function(){}
 		this.game.state.start("Configs");
 	}
 }
