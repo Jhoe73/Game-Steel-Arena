@@ -203,6 +203,9 @@ PlayerSelect.prototype = {
 	},
 
 	actionOnClickGoBack: function(){
+		playersImg = [];
+		ersonsSelected = [];
+		rights = [];
 		previousState = "PlayerSelect";
 		this.game.state.start("GameTitle");
 	},
@@ -234,6 +237,9 @@ PlayerSelect.prototype = {
 	},
 
 	startGame: function(){
+		playersImg = [];
+		ersonsSelected = [];
+		rights = [];
 		previousState = "PlayerSelect";
 		this.game.state.start("Main");
 	}

@@ -102,7 +102,7 @@ function Player(playerName, spritesheet, physicsKey, collisionGroup, width, heig
 		this.getPlayer().body.collides(groundCollisionGroup, this.player_on_ground, this);
 	}
 
-	this.checkIfCanJump = function() {
+	this.JumpIsPossible = function() {
 		var yAxis = p2.vec2.fromValues(0, 1);
 		var result = false;
 		for (var i = 0; i < game.physics.p2.world.narrowphase.contactEquations.length; i++){
@@ -186,7 +186,7 @@ function Player(playerName, spritesheet, physicsKey, collisionGroup, width, heig
 		}
 
 		//  Allow the robo to jump if they are touching the ground.
-    if (this.getUp_button().isDown && this.checkIfCanJump()){
+    if (this.getUp_button().isDown && this.JumpIsPossible()){
 	  	if (!(this.animation_puloR.isPlaying || this.animation_puloL.isPlaying)) {
 				this.getPlayer().body.moveUp(750);
 				switch (this.getDirecao()) {
@@ -245,6 +245,8 @@ function Player(playerName, spritesheet, physicsKey, collisionGroup, width, heig
 				bullet.anchor.setTo(0.5);
 				bullet.scale.setTo(0.40);
 
+				bullet.name = this.getPlayerName();
+
 				game.physics.p2.enable(bullet, false);
 
 				bullet.body.setMaterial(bulletMaterial);
@@ -293,15 +295,26 @@ function Player(playerName, spritesheet, physicsKey, collisionGroup, width, heig
 	this.bullet_on_player = function (bullet, player) {
 		if (!bullet.hasCollided) {
 			player.sprite.kill();
-			this.number_of_kills++;
+			hit = player.sprite.name.replace(/[^0-9]/g,'');
+			hit = parseInt(hit);
+			if (bullet.sprite.name = player.sprite.name) {
+				for (var i = 0; i < playersObj.length; i++) {
+					if (playersObj[i].getPlayerName() != player.sprite.name) {
+						playerShoot = playersObj[i];
+					}
+				}
+			} else {
+				playerShoot = playersObj[hit-1];
+			}
+			playerShoot.number_of_kills++;
 			coinSound = game.add.audio('coin');
 			coinSound.play();
 			coinSound.volume = volumeSound*0.1;
-			if (this.number_of_kills < 3) {
+			if (playerShoot.number_of_kills < 3) {
 				change_kills_scoregorund();
 				change_round();
 			} else {
-				winner = this.getPlayer();
+				winner = playerShoot.getPlayer();
 				gameOver();
 			}
 			bullet.hasCollided = true;

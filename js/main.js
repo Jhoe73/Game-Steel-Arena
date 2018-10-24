@@ -39,7 +39,7 @@ Main.prototype = {
 			pauseNoticeText = game.add.text(game.world.centerX, game.world.centerY, 'Paused', msgRedEL);
 			pauseNoticeText.anchor.setTo(.5, 0);
 			pauseNoticeText.resolution = 4;
-			pauseNoticeText2 = game.add.text(game.world.centerX, game.world.centerY+50, 'Click on Screen', msgRedM);
+			pauseNoticeText2 = game.add.text(game.world.centerX, game.world.centerY+100, 'Click on Screen', msgRedM);
 			pauseNoticeText2.anchor.setTo(.5, 0);
 			pauseNoticeText2.resolution = 4;
 		});
